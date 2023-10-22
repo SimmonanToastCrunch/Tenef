@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/font/PixeloidMono-1G8ae.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/UI/NewGameUI.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/ui/icon_back.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/ui/icon_back_hover.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="NewGameUI" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -540.0
+margin_right = 960.0
+margin_bottom = 540.0
+script = ExtResource( 2 )
+
+[node name="Base" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0.576471 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -452.0
+margin_top = -352.0
+margin_right = 452.0
+margin_bottom = 352.0
+
+[node name="TopPanel" type="Panel" parent="Base"]
+self_modulate = Color( 1, 1, 1, 0.823529 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -448.0
+margin_top = -348.0
+margin_right = 448.0
+margin_bottom = 348.0
+
+[node name="WorldNameInput" type="LineEdit" parent="Base/TopPanel"]
+margin_left = 224.0
+margin_top = 80.0
+margin_right = 672.0
+margin_bottom = 144.0
+custom_fonts/font = SubResource( 1 )
+align = 1
+max_length = 24
+placeholder_text = "enter world name (1-24 characters)"
+
+[node name="InputBackRect" type="ColorRect" parent="Base/TopPanel/WorldNameInput"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -448.0
+margin_bottom = -64.0
+color = Color( 0, 0, 0, 0.372549 )
+
+[node name="CreateWorld" type="Button" parent="Base/TopPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -112.0
+margin_right = 128.0
+margin_bottom = -56.0
+text = "Create World"
+
+[node name="ErrorMessage" type="Label" parent="Base/TopPanel"]
+visible = false
+margin_left = 128.0
+margin_top = 8.0
+margin_right = 768.0
+margin_bottom = 58.0
+custom_colors/font_color = Color( 0.72549, 0.0117647, 0.0117647, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "World name cannot contain
+\\ / : * \" ? < > |"
+align = 1
+valign = 1
+
+[node name="BackButton" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -448.0
+margin_top = -348.0
+margin_right = -384.0
+margin_bottom = -284.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+expand = true
+
+[connection signal="pressed" from="Base/TopPanel/CreateWorld" to="." method="_on_create_world_clicked"]
+[connection signal="pressed" from="BackButton" to="." method="_close"]

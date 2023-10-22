@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/ItemboxHint.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/ui/item_box_delete.png" type="Texture" id=2]
+[ext_resource path="res://assets/font/kongtext.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/wood.png-933d7117d42d10b705354e7413acb5b6.stex"
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BaseSprite/Weapon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BaseSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Amount:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "box_zoom"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("BaseSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.15, 1.15 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Amount:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 16 ), Vector2( 6, 21 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "zoom"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("BaseSprite/Weapon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.15, 1.15 ) ]
+}
+
+[node name="Itembox" type="Node2D" groups=["itemhints"]]
+position = Vector2( 272, 144 )
+script = ExtResource( 1 )
+base_texture = "cost_box"
+
+[node name="BaseSprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Weapon" type="Sprite" parent="BaseSprite"]
+scale = Vector2( 1.15, 1.15 )
+texture = SubResource( 5 )
+
+[node name="Amount" type="Label" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 41.0
+rect_scale = Vector2( 1.25, 1.25 )
+custom_fonts/font = SubResource( 4 )
+text = "0"
+align = 2
+
+[node name="Anims" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/box_zoom = SubResource( 3 )
+anims/zoom = SubResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -48.0
+margin_top = -48.0
+margin_right = 48.0
+margin_bottom = 48.0
+
+[connection signal="visibility_changed" from="." to="." method="_on_itembox_visibility_changed"]
+[connection signal="mouse_entered" from="Panel" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Panel" to="." method="_on_mouse_exited"]

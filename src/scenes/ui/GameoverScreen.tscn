@@ -1,0 +1,162 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/font/PixeloidMono-1G8ae.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/art/player/hobo_dead.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/GameoverScreen.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 144
+use_mipmaps = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Base:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Base/Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Base/Button:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "return"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Base:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Base/Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Base/Button:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Base/Sprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="GameoverScreen" type="CanvasLayer" groups=["gameover"]]
+layer = 2
+script = ExtResource( 3 )
+
+[node name="Base" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="Base"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0.0313726, 0.0313726, 0.0313726, 1 )
+
+[node name="Label" type="Label" parent="Base"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 1920.0
+margin_bottom = 512.0
+custom_colors/font_color = Color( 0.54902, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Defeat..."
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="Base"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 728.0
+margin_top = 768.0
+margin_right = 1128.0
+margin_bottom = 829.0
+custom_fonts/font = SubResource( 3 )
+text = "Return to Island"
+
+[node name="Sprite" type="Sprite" parent="Base"]
+position = Vector2( 960, 512 )
+scale = Vector2( 4.47, 4.47 )
+texture = ExtResource( 2 )
+
+[node name="Anims" type="AnimationPlayer" parent="."]
+playback_speed = 1.5
+anims/fade = SubResource( 2 )
+anims/return = SubResource( 4 )
+
+[connection signal="pressed" from="Base/Button" to="." method="_button_pressed"]
+[connection signal="animation_finished" from="Anims" to="." method="_anim_finish"]
