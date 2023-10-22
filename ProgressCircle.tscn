@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/ProgressCircle.gd" type="Script" id=1]
+
+[node name="ProgressCircle" type="Node2D"]
+modulate = Color( 0.34902, 1, 0, 1 )
+position = Vector2( 325, 149 )
+script = ExtResource( 1 )
+radius = 18.0
