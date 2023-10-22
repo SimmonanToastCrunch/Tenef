@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/boxbreak3.ogg-d06a7aa31c6beeb3fbbbc24c493de7fb.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/boxbreak3.ogg"
+dest_files=[ "res://.import/boxbreak3.ogg-d06a7aa31c6beeb3fbbbc24c493de7fb.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
