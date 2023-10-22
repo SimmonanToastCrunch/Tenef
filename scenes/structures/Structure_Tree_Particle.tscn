@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/art/structures/structure_palmtree_particle.png" type="Texture" id=1]
+[ext_resource path="res://src/Structure_Tree_Particle.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.708075, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+direction = Vector3( 0, -40, 0 )
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.29
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 180.0
+angle_random = 1.0
+scale_random = 1.0
+color_ramp = SubResource( 6 )
+
+[node name="Structure_Tree_Particle" type="Particles2D"]
+position = Vector2( 24, 16 )
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 4
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 4 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}

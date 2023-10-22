@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/art/structures/structure_boulder.png" type="Texture" id=1]
+[ext_resource path="res://src/StructureBoulder.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 24 )
+
+[node name="Structure_Boulder" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Boulder" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Collision" type="StaticBody2D" parent="Boulder"]
+position = Vector2( 12, 12 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boulder/Collision"]
+position = Vector2( 0, 8 )
+shape = SubResource( 1 )
+
+[node name="HarvestBox" type="Area2D" parent="."]
+position = Vector2( 0, -8 )
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HarvestBox"]
+position = Vector2( 24, 24 )
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="HarvestBox" to="." method="_on_hit"]

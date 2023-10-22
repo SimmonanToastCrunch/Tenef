@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/font/PixeloidMono-1G8ae.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/UI/LoadGameUI.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/ui/icon_back_hover.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/ui/icon_back.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 36
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="LoadGameUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Base" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -416.0
+margin_top = -288.0
+margin_right = 416.0
+margin_bottom = 288.0
+
+[node name="List" type="ItemList" parent="Base"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -384.0
+margin_top = -224.0
+margin_right = 384.0
+margin_bottom = 224.0
+
+[node name="Scrollbar" type="VScrollBar" parent="Base/List"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = 12.0
+margin_right = 8.0
+margin_bottom = 412.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="Hint" type="Label" parent="Base"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -416.0
+margin_right = 416.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 1 )
+text = "Select Save to Load"
+align = 1
+valign = 1
+
+[node name="ErrorMessage" type="Label" parent="Base"]
+visible = false
+margin_top = 508.0
+margin_right = 832.0
+margin_bottom = 572.0
+custom_colors/font_color = Color( 0.611765, 0.0313726, 0.0313726, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Save file not found :("
+align = 1
+valign = 1
+
+[node name="BackButton" type="TextureButton" parent="Base"]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 3 )
+expand = true
+
+[connection signal="value_changed" from="Base/List/Scrollbar" to="." method="_on_scroll"]
+[connection signal="pressed" from="Base/BackButton" to="." method="_back"]
