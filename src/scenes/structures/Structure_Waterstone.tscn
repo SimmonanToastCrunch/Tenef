@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://assets/art/structures/structure_waterstone.png" type="Texture" id=1]
-
-[node name="Structure_Waterstone" type="Sprite"]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 1 )
-offset = Vector2( 12, 12 )

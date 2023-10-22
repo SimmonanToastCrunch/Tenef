@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://src/Grid_Check.gd" type="Script" id=1]
-
-[node name="Ghost_Building" type="Sprite" groups=["ghost_building"]]
-centered = false
-script = ExtResource( 1 )
